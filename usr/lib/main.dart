@@ -1,123 +1,158 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const UrologicEquityReviewApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class UrologicEquityReviewApp extends StatelessWidget {
+  const UrologicEquityReviewApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Academic Review Viewer',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF1A365D), // Deep academic blue
+          brightness: Brightness.light,
+        ),
+        useMaterial3: true,
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontSize: 16, height: 1.6, color: Colors.black87),
+          bodyMedium: TextStyle(fontSize: 14, height: 1.5, color: Colors.black87),
+          headlineMedium: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1A365D)),
+        ),
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
+        '/': (context) => const ReviewArticleScreen(),
       },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class ReviewArticleScreen extends StatelessWidget {
+  const ReviewArticleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('Academic Review Draft'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        elevation: 0,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
-          ],
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Health Inequity Among Migrants in Urologic Care: A Comprehensive Review',
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontSize: 28,
+                        height: 1.3,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const Divider(),
+                    const SizedBox(height: 24),
+                    Text(
+                      'Introduction',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Health inequities among migrant populations represent a critical and growing concern in urologic care, reflecting broader systemic disparities in healthcare access and outcomes. As global migration increases, urologists are increasingly encountering diverse patient populations who face multifaceted barriers to care, including legal status, language and cultural differences, socioeconomic challenges, and limited health literacy [1, 2]. These barriers frequently impede timely and equitable access to specialized urologic services, contributing to suboptimal screening, delayed diagnosis, and inadequate treatment of urologic conditions such as urologic malignancies and urolithiasis [3, 4]. \n\nFurthermore, geographic factors, such as rural residence and low urologist density, disproportionately affect marginalized groups, compounding difficulties in accessing essential urologic care [5, 6]. Despite the increasing diversity of populations, targeted research on migrants’ specific urologic health needs remains limited, underscoring the necessity for migrant-sensitive healthcare models that address cultural competence, affordability, and structural inequities [7, 8]. This review synthesizes the latest evidence on health inequities affecting migrants in urologic care, highlighting the social determinants, systemic barriers, and policy gaps that perpetuate disparities, and proposes strategies to promote equitable, culturally competent, and accessible urologic healthcare for migrant populations.',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      textAlign: TextAlign.justify,
+                    ),
+                    const SizedBox(height: 40),
+                    Text(
+                      'References',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildReferenceItem(
+                      '1',
+                      'Immigrants’ self-perceived barriers to healthcare: A systematic review of quantitative evidence in European countries. ScienceDirect, 2025.',
+                    ),
+                    _buildReferenceItem(
+                      '2',
+                      'Health and Health Care Experiences of Immigrants: The 2023 KFF/LA Times Survey of Immigrants. KFF, 2023.',
+                    ),
+                    _buildReferenceItem(
+                      '3',
+                      'Striving for Equity: Examining Health Disparities in Urologic Oncology. PMC, 2024.',
+                    ),
+                    _buildReferenceItem(
+                      '4',
+                      'Racial disparities in urologic health care. PubMed.',
+                    ),
+                    _buildReferenceItem(
+                      '5',
+                      'Rural Health Disparities in Urologic Care. American Urological Association, 2025.',
+                    ),
+                    _buildReferenceItem(
+                      '6',
+                      'Combining Drive Time and Urologist Density to Understand Access to Urologic Care. PMC, 2020.',
+                    ),
+                    _buildReferenceItem(
+                      '7',
+                      'Migrant-sensitive healthcare in Europe: advancing health equity through accessibility, acceptability, quality, and trust. PMC, 2024.',
+                    ),
+                    _buildReferenceItem(
+                      '8',
+                      'Spatial variations in health service utilization among migrant population: a perspective on health equity. Frontiers in Public Health, 2024.',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget _buildReferenceItem(String number, String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 24,
+            child: Text(
+              '[$number]',
+              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 14, color: Colors.black87, height: 1.4),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
